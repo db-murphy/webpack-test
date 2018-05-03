@@ -16,17 +16,23 @@
 // var k = new Person({a: 123});
 //
 // k.aa();
+import style from './a.css';
 
-function* idMaker(){
-    let index = 0;
-    while(true)
-        yield index++;
-}
+console.log(11);
+// import img from './img/a.jpg'
 
-let gen = idMaker(); // "Generator { }"
+// console.log(img);
 
-console.log(gen.next().value);
-// 0
-console.log(gen.next().value);
-// 1
-console.log(gen.next().value);
+// function* idMaker(){
+//     let index = 0;
+//     while(true)
+//         yield index++;
+// }
+//
+// let gen = idMaker(); // "Generator { }"
+//
+// console.log(gen.next().value);
+// // 0
+// console.log(gen.next().value);
+// // 1
+// console.log(gen.next().value);
