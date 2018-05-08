@@ -16,7 +16,9 @@
 // var k = new Person({a: 123});
 //
 // k.aa();
-import style from './a.css';
+// import style from './a.css';
+// var s = require('a.scss');
+import './a.scss';
 
 console.log(11);
 // import img from './img/a.jpg'

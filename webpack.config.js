@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 const path = require('path');
+// const utils = require('./utils')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
@@ -37,22 +38,42 @@ module.exports = {
                   }
                 }]
             },
+            // {
+            //     test: /\.css$/,
+            //     use: [
+            //         MiniCssExtractPlugin.loader,
+            //       // {
+            //       //     loader: "style-loader"
+            //       //   },
+            //         // { loader: "file-loader" },
+            //       {
+            //           loader: "css-loader",
+            //           options: {
+            //               // url: true, // 是否忽略css-loader对url的解析，如果忽略则不会触发url-loader或者file-loader
+            //               minimize: true
+            //           }
+            //       }
+            //
+            //     ]
+            // },
             {
-                test: /\.css$/,
+                test: /\.scss$/,
                 use: [
                     MiniCssExtractPlugin.loader,
-                  // {
-                  //     loader: "style-loader"
-                  //   },
-                    // { loader: "file-loader" },
                   {
                       loader: "css-loader",
                       options: {
-                          // url: true, // 是否忽略css-loader对url的解析，如果忽略则不会触发url-loader或者file-loader
-                          minimize: true
+                          minimize: false,
+                          sourceMap: true
+                      }
+                  },
+                  { loader: 'postcss-loader', options: { sourceMap: true } }, // 自动添加前缀
+                  {
+                      loader: "sass-loader",
+                      options: {
+                          sourceMap: true
                       }
                   }
-
                 ]
             },
             {
