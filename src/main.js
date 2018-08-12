@@ -18,9 +18,9 @@
 // k.aa();
 // import style from './a.css';
 // var s = require('a.scss');
-import './a.scss';
+// import './a.scss';
 
-console.log(11);
+// console.log(11);
 // import img from './img/a.jpg'
 
 // console.log(img);
@@ -38,3 +38,7 @@ console.log(11);
 // console.log(gen.next().value);
 // // 1
 // console.log(gen.next().value);
+
+import abc from './x.js';
+
+console.log(abc);
