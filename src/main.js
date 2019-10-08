@@ -18,8 +18,6 @@
 // k.aa();
 // import style from './a.css';
 // var s = require('a.scss');
-// import './a.scss';
-
 // console.log(11);
 // import img from './img/a.jpg'
 
@@ -39,6 +37,12 @@
 // // 1
 // console.log(gen.next().value);
 
-import abc from './x.js';
+import {
+    add1,
+    add2
+} from './math';
+import { a } from 'abc';
+let b = 1;
+a();
 
-console.log(abc);
+add1(100);

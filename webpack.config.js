@@ -2,10 +2,13 @@ var webpack = require('webpack');
 const path = require('path');
 // const utils = require('./utils')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const {
+    CleanWebpackPlugin
+} = require('clean-webpack-plugin');
 
-function resolve (dir) {
-  return path.join(__dirname, dir);
+function resolve(dir) {
+    return path.join(__dirname, dir);
 }
 
 module.exports = {
@@ -18,14 +21,17 @@ module.exports = {
     output: {
         path: __dirname + '/build',
         filename: '[name].[chunkhash].js',
-        // publicPath: '//static.360buyimg.com/shangou/pop-manager/',
         publicPath: './',
         chunkFilename: '[id].[chunkhash].js'
     },
     resolve: {
         alias: {
 
-        }
+        },
+        mainFields: ['module', 'main']
+    },
+    optimization: {
+        usedExports: true
     },
     module: {
         rules: [
@@ -38,42 +44,47 @@ module.exports = {
                   }
                 }]
             },
-            // {
-            //     test: /\.css$/,
-            //     use: [
-            //         MiniCssExtractPlugin.loader,
-            //       // {
-            //       //     loader: "style-loader"
-            //       //   },
-            //         // { loader: "file-loader" },
-            //       {
-            //           loader: "css-loader",
-            //           options: {
-            //               // url: true, // 是否忽略css-loader对url的解析，如果忽略则不会触发url-loader或者file-loader
-            //               minimize: true
-            //           }
-            //       }
-            //
-            //     ]
-            // },
+            {
+                test: /\.css$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    // {
+                    //     loader: "style-loader"
+                    //   },
+                    // { loader: "file-loader" },
+                    {
+                        loader: "css-loader",
+                        options: {
+                            // url: true, // 是否忽略css-loader对url的解析，如果忽略则不会触发url-loader或者file-loader
+                            minimize: true
+                        }
+                    }
+
+                ]
+            },
             {
                 test: /\.scss$/,
                 use: [
                     MiniCssExtractPlugin.loader,
-                  {
-                      loader: "css-loader",
-                      options: {
-                          minimize: false,
-                          sourceMap: true
-                      }
-                  },
-                  { loader: 'postcss-loader', options: { sourceMap: true } }, // 自动添加前缀
-                  {
-                      loader: "sass-loader",
-                      options: {
-                          sourceMap: true
-                      }
-                  }
+                    {
+                        loader: "css-loader",
+                        options: {
+                            minimize: false,
+                            sourceMap: true
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    }, // 自动添加前缀
+                    {
+                        loader: "sass-loader",
+                        options: {
+                            sourceMap: true
+                        }
+                    }
                 ]
             },
             {
@@ -89,19 +100,20 @@ module.exports = {
                 ]
               },
             {
-              test: /\.js$/,
-              exclude: /(node_modules|bower_components)/,
-              use: {
-                loader: 'babel-loader' // es6，es7，es8语法转es5，option配置见.babelrc
-              }
+                test: /\.js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader' // es6，es7，es8语法转es5，option配置见.babelrc
+                }
             }
         ]
     },
     plugins: [
+        new CleanWebpackPlugin(),
         new webpack.BannerPlugin('created by chhuangxiaolong@jd.com'),
         new MiniCssExtractPlugin({
             filename: "[name].[chunkhash:8].css",
-       　　 chunkFilename: "[id].css"
+            chunkFilename: "[id].css"
         }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname + '/index.html')
