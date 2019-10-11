@@ -41,8 +41,5 @@ import {
     add1,
     add2
 } from './math';
-import { a } from 'abc';
-let b = 1;
-a();
 
 add1(100);

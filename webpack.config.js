@@ -25,23 +25,20 @@ module.exports = {
         chunkFilename: '[id].[chunkhash].js'
     },
     resolve: {
-        alias: {
-
-        },
+        alias: {},
         mainFields: ['module', 'main']
     },
     optimization: {
         usedExports: true
     },
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.html$/,
-                use: [ {
-                  loader: 'html-loader', // 加载.html文件
-                  options: {
-                    minimize: false
-                  }
+                use: [{
+                    loader: 'html-loader', // 加载.html文件
+                    options: {
+                        minimize: false
+                    }
                 }]
             },
             {
@@ -89,22 +86,25 @@ module.exports = {
             },
             {
                 test: /\.(png|jpg|gif)$/,
-                use: [
-                  {
+                use: [{
                     loader: 'url-loader',
                     options: {
-                      limit: 1,
-                      name: 'img/[name].[hash:17].[ext]'
+                        limit: 1,
+                        name: 'img/[name].[hash:17].[ext]'
                     }
-                  }
-                ]
-              },
+                }]
+            },
             {
                 test: /\.js$/,
                 exclude: /(node_modules|bower_components)/,
                 use: {
                     loader: 'babel-loader' // es6，es7，es8语法转es5，option配置见.babelrc
                 }
+            },
+            {
+                test: /\.ts$/,
+                use: 'ts-loader',
+                exclude: /node_modules/
             }
         ]
     },
